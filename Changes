@@ -1,4 +1,7 @@
-Revision history for Perl extension Text::Ngram.
+Revision history for Text-Ngram
+
+0.06  Sat Apr 03 11:48:00 2005
+	- added pod-coverage.t to the tests directory
 
 0.05  Wed Nov 03 00:04:00 2004
         - added more tests

@@ -11,11 +11,11 @@ our %EXPORT_TAGS = ( 'all' => [ qw( ngram_counts add_to_counts) ] );
 our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 our @EXPORT = qw();
 
-our $VERSION = '0.05';
+our $VERSION = '0.06';
 
 =head1 NAME
 
-Text::Ngram - Basis for n-gram analysis
+Text::Ngram - Ngram analysis of text
 
 =head1 SYNOPSIS
 
@@ -53,7 +53,7 @@ There are two functions which can be imported:
 require XSLoader;
 XSLoader::load('Text::Ngram', $VERSION);
 
-sub clean_buffer {
+sub _clean_buffer {
     my %config = %{+shift};
     my $buffer = lc shift if $config{lowercase};
     $buffer =~ s/\s+/ /g;
@@ -80,9 +80,7 @@ The only necessary parameter is $text.
 
 The possible value for \%config are:
 
-=over 6
-
-=item flankbreaks
+=head3 flankbreaks
 
 If set to 1 (default), breaks are flanked by spaces; if set to 0,
 they're not. Breaks are punctuation and other non-alfabetic
@@ -117,7 +115,7 @@ Produces the following ngrams:
     'world' => 1,
   }
 
-=item lowercase
+=head3 lowercase
 
 If set to 0, casing is preserved. If set to 1, all letters are
 lowercased before counting ngrams. Default is 1.
@@ -125,17 +123,17 @@ lowercased before counting ngrams. Default is 1.
     # Get all ngrams of size 4 preserving case
     $href_p = ngram_counts( {lowercase => 0}, $text, 4 );
 
-=item punctuation
+=head3 punctuation
 
-If set to 0, punctuation is removed before calculating the ngrams. Set
-to 1 to preserve it. Default is 0.
+If set to 0 (default), punctuation is removed before calculating the
+ngrams.  Set to 1 to preserve it.
 
     # Get all ngrams of size 2 preserving punctuation
     $href_p = ngram_counts( {punctuation => 1}, $text, 2 );
 
-=item spaces
+=head3 spaces
 
-If set to 0, no ngrams contaning spaces will be returned
+If set to 0 default is 1, no ngrams contaning spaces will be returned.
 
    # Get all ngrams of size 3 that do not contain spaces
    $href = ngram_counts( {spaces => 0}, $text, 3);
@@ -146,16 +144,6 @@ avoid calculating the same thing twice is probably this:
     $href_with_spaces = ngram_counts($text[, $window]);
     $href_no_spaces = $href_with_spaces;
     for (keys %$href_no_spaces) { delete $href->{$_} if / / }
-
-=back
-
-Remember, the default configuration is:
-
-  {
-    spaces      => 1,
-    punctuation => 0,
-    lowercase   => 1,
-  }
 
 =cut
 
@@ -172,7 +160,7 @@ sub ngram_counts {
     my ($buffer, $width) = @_;
     $width ||= 5;
     return {} if $width < 1;
-    my $href = process_buffer(clean_buffer(\%config, $buffer), $width);
+    my $href = _process_buffer(_clean_buffer(\%config, $buffer), $width);
     for (keys %$href) { delete $href->{$_} if /\xff/ }
     unless ($config{spaces}) {
         for (keys %$href) { delete $href->{$_} if / / }
@@ -196,7 +184,7 @@ sub add_to_counts {
         my ($key, undef) = each %$href; # Just gimme a random key
         $width = length $key || 5;
     }
-    process_buffer_incrementally(clean_buffer(\%config, $buffer), $width, $href);
+    _process_buffer_incrementally(_clean_buffer(\%config, $buffer), $width, $href);
     for (keys %$href) { delete $href->{$_} if /\xff/ }
 }
 
