@@ -11,7 +11,7 @@ our %EXPORT_TAGS = ( 'all' => [ qw( ngram_counts add_to_counts) ] );
 our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 our @EXPORT = qw();
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 require XSLoader;
 XSLoader::load('Text::Ngram', $VERSION);
@@ -20,9 +20,8 @@ XSLoader::load('Text::Ngram', $VERSION);
 
 sub clean_buffer {
     my $buffer = lc shift;
-    $buffer =~ s/[,\.:;'"\?!0-9]/ \xff /g;
-    $buffer =~ s/[^a-z \xff]+//g;
     $buffer =~ s/\s+/ /g;
+    $buffer =~ s/[^a-z ]+/ \xff /g;
     return $buffer;
 }
 
