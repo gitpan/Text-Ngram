@@ -11,7 +11,7 @@ our %EXPORT_TAGS = ( 'all' => [ qw( ngram_counts add_to_counts) ] );
 our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 our @EXPORT = qw();
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 require XSLoader;
 XSLoader::load('Text::Ngram', $VERSION);
@@ -124,28 +124,14 @@ Ullmann, J. R. (1977). Binary n-gram technique for automatic correction
 of substitution, deletion, insert and reversal errors in words.
 I<Computer Journal, 20>. 141-147.
 
-=head1 SUPPORT
-
-Beep... beep... this is a recorded announcement:
-
-I've released this software because I find it useful, and I hope you
-might too. But I am a being of finite time and I'd like to spend more of
-it writing cool modules like this and less of it answering email, so
-please excuse me if the support isn't as great as you'd like.
-
-Nevertheless, there is a general discussion list for users of all my
-modules, to be found at
-http://lists.netthink.co.uk/listinfo/module-mayhem
-
-If you have a problem with this module, someone there will probably have
-it too.
-
 =head1 AUTHOR
 
-Simon Cozens, C<simon@cpan.org>
+Maintained by Jose Castro, C<cog@cpan.org>.
+Originally created by Simon Cozens, C<simon@cpan.org>.
 
 =head1 COPYRIGHT AND LICENSE
 
+Copyright 2004 by Jose Castro
 Copyright 2003 by Simon Cozens
 
 This library is free software; you can redistribute it and/or modify

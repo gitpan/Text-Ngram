@@ -1,5 +1,8 @@
 Revision history for Perl extension Text::Ngram.
 
+0.04 minor changes to the documentation
+     added META.yml
+
 0.03 changed the way text is prepared
 
 0.02 fixed an embarassing export bug
