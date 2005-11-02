@@ -11,7 +11,7 @@ our %EXPORT_TAGS = ( 'all' => [ qw( ngram_counts add_to_counts) ] );
 our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 our @EXPORT = qw();
 
-our $VERSION = '0.07';
+our $VERSION = '0.08';
 
 =head1 NAME
 
@@ -55,7 +55,10 @@ XSLoader::load('Text::Ngram', $VERSION);
 
 sub _clean_buffer {
     my %config = %{+shift};
-    my $buffer = lc shift if $config{lowercase};
+
+    my $buffer = shift;
+    $buffer = lc $buffer if $config{lowercase};
+
     $buffer =~ s/\s+/ /g;
     unless ($config{punctuation}) {
       if ($config{flankbreaks}) {
@@ -90,13 +93,13 @@ configuration, do not make it into the returned hash.
 Here's an example, supposing you're using the default value
 for punctuation (1):
 
-  my $text = "Hello, world";
+  my $text = "hello, world";
   my $hash = ngram_counts($text, 5);
 
 That produces the following ngrams:
 
   {
-    'Hello' => 1,
+    'hello' => 1,
     'ello ' => 1,
     ' worl' => 1,
     'world' => 1,
@@ -104,13 +107,13 @@ That produces the following ngrams:
 
 On the other hand, this:
 
-  my $text = "Hello, world";
+  my $text = "hello, world";
   my $hash = ngram_counts({flankbreaks => 0}, $text, 5);
 
 Produces the following ngrams:
 
   {
-    'Hello' => 1,
+    'hello' => 1,
     ' worl' => 1,
     'world' => 1,
   }

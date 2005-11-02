@@ -1,4 +1,4 @@
-Ngram.pm version 0.07
+Ngram.pm version 0.08
 =====================
 
 =head1 NAME
@@ -57,13 +57,13 @@ configuration, do not make it into the returned hash.
 Here's an example, supposing you're using the default value
 for punctuation (1):
 
-  my $text = "Hello, world";
+  my $text = "hello, world";
   my $hash = ngram_counts($text, 5);
 
 That produces the following ngrams:
 
   {
-    'Hello' => 1,
+    'hello' => 1,
     'ello ' => 1,
     ' worl' => 1,
     'world' => 1,
@@ -71,13 +71,13 @@ That produces the following ngrams:
 
 On the other hand, this:
 
-  my $text = "Hello, world";
+  my $text = "hello, world";
   my $hash = ngram_counts({flankbreaks => 0}, $text, 5);
 
 Produces the following ngrams:
 
   {
-    'Hello' => 1,
+    'hello' => 1,
     ' worl' => 1,
     'world' => 1,
   }

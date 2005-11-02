@@ -1,4 +1,3 @@
-# vim:ft=perl
 use Test::More tests => 15;
 use_ok("Text::Ngram");
 
