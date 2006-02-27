@@ -1,17 +1,10 @@
 Revision history for Text-Ngram
 
-0.08  Fri Oct 28 16:40:00 2005
-	- fixed a bug (thanks to Greg) that had apparently been
-	  lurking around since the beginning of times (bug would only
-	  expose itself whenever the lowercase flag not set, which wouldn't
-	  happen often, as it probably isn't common to search for case-sensitive
-	  ngrams); digging deeper to understand the bug, by the way,
-	  has unleashed a hell of confusion given that the documentation has a
-	  couple of minor bugs that can become a major PITA in certain
-	  situations... the module is safe to use if you don't want to
-	  do major hacks with uppercased ngrams, but another version will
-	  probably be available soon (for certain values of soon)
-	- added tests for behavior with lowercase flag not set
+0.09  Mon Feb 27 15:06:00 2006 - "Overtake"
+	- Changed maintainership and contact information
+	- Moved .pm file to lib/Text
+
+0.08  (02 Nov 2005)
 
 0.07  Fri Apr 15 00:32:00 2005
 	- fixed a bug introduced in 0.06, thanks to Marcus (always remember to
