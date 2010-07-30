@@ -11,7 +11,7 @@ our %EXPORT_TAGS = ( 'all' => [ qw( ngram_counts add_to_counts) ] );
 our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 our @EXPORT = qw();
 
-our $VERSION = '0.11';
+our $VERSION = '0.12';
 
 =head1 NAME
 
@@ -55,7 +55,8 @@ XSLoader::load('Text::Ngram', $VERSION);
 
 sub _clean_buffer {
     my %config = %{+shift};
-    my $buffer = lc shift if $config{lowercase};
+    my $buffer = shift;
+    $buffer = lc $buffer if $config{lowercase};
     $buffer =~ s/\s+/ /g;
     unless ($config{punctuation}) {
       if ($config{flankbreaks}) {
@@ -84,7 +85,7 @@ The possible value for \%config are:
 
 If set to 1 (default), breaks are flanked by spaces; if set to 0,
 they're not. Breaks are punctuation and other non-alfabetic
-characters, which, unless you use C<punctuation => 0> in your
+characters, which, unless you use C<< punctuation => 0 >> in your
 configuration, do not make it into the returned hash.
 
 Here's an example, supposing you're using the default value
@@ -133,7 +134,7 @@ ngrams.  Set to 1 to preserve it.
 
 =head3 spaces
 
-If set to 0 default is 1, no ngrams contaning spaces will be returned.
+If set to 0 (default is 1), no ngrams contaning spaces will be returned.
 
    # Get all ngrams of size 3 that do not contain spaces
    $href = ngram_counts( {spaces => 0}, $text, 3);
