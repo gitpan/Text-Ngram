@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               Text-Ngram
-version:            0.12
+version:            0.13
 abstract:           Ngram analysis of text
 author:
     - Alberto Simoes <ambs@cpan.org>
