@@ -3,19 +3,20 @@ abstract: 'Ngram analysis of text'
 author:
   - 'Alberto Simoes <ambs@cpan.org>'
 build_requires:
-  ExtUtils::MakeMaker: 0
+  ExtUtils::MakeMaker: '0'
 configure_requires:
-  ExtUtils::MakeMaker: 0
+  ExtUtils::MakeMaker: '0'
 dynamic_config: 1
-generated_by: 'ExtUtils::MakeMaker version 6.62, CPAN::Meta::Converter version 2.113640'
+generated_by: 'ExtUtils::MakeMaker version 6.98, CPAN::Meta::Converter version 2.141520'
 license: unknown
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
-  version: 1.4
+  version: '1.4'
 name: Text-Ngram
 no_index:
   directory:
     - t
     - inc
-requires: {}
-version: 0.14
+requires:
+  Unicode::CaseFold: '1.00'
+version: 0.15_1
