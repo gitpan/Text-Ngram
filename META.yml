@@ -19,4 +19,4 @@ no_index:
     - inc
 requires:
   Unicode::CaseFold: '1.00'
-version: 0.15_1
+version: '0.15'
